@@ -62,7 +62,7 @@ async fn main() {
 
     // 运行 web 服务器
     let addr = "127.0.0.1:3000".parse().unwrap();
-    print_test_url("https://images.pexels.com/photos/1562477/pexels-photo-1562477.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+    print_test_url("https://images.pexels.com/photos/3249931/pexels-photo-3249931.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
     info!("Listening on {}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
