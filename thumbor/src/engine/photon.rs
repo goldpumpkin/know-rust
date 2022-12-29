@@ -40,6 +40,7 @@ impl Engine for Photon {
                 Some(spec::Data::Flipv(ref v)) => self.transform(v),
                 Some(spec::Data::Resize(ref v)) => self.transform(v),
                 Some(spec::Data::Watermark(ref v)) => self.transform(v),
+                Some(spec::Data::Oil(ref v)) => self.transform(v),
                 // 对于目前不认识的 spec，不做任何处理
                 _ => {}
             }
@@ -104,6 +105,12 @@ impl SpecTransform<&Resize> for Photon {
 impl SpecTransform<&Watermark> for Photon {
     fn transform(&mut self, op: &Watermark) {
         multiple::watermark(&mut self.0, &WATERMARK, op.x, op.y);
+    }
+}
+
+impl SpecTransform<&Oil> for Photon {
+    fn transform(&mut self, op: &Oil) {
+        effects::oil(&mut self.0, op.radius, op.intensity);
     }
 }
 

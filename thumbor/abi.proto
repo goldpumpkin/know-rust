@@ -61,6 +61,12 @@ message Watermark {
   uint32 y = 2;
 }
 
+// 油画
+message Oil {
+  int32 radius = 1;
+  double intensity = 2;
+}
+
 // 一个 spec 可以包含上述的处理方式之一
 message Spec {
   oneof data {
@@ -71,5 +77,8 @@ message Spec {
     Contrast contrast = 5;
     Filter filter = 6;
     Watermark watermark = 7;
+    Oil oil = 8;
   }
 }
+
+

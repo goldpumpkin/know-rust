@@ -2,12 +2,14 @@ use base64::{decode_config, encode_config, URL_SAFE_NO_PAD};
 use photon_rs::transform::SamplingFilter;
 use prost::Message;
 
-mod abi; // 声明 abi.rs
+mod abi;
+
+// 声明 abi.rs
 pub use abi::*;
 
 impl ImageSpec {
     pub fn new(specs: Vec<Spec>) -> Self {
-        Self {specs}
+        Self { specs }
     }
 }
 
@@ -90,6 +92,12 @@ impl Spec {
     pub fn new_watermark(x: u32, y: u32) -> Self {
         Self {
             data: Some(spec::Data::Watermark(Watermark { x, y })),
+        }
+    }
+
+    pub fn new_oil(radius: i32, intensity: f64) -> Self {
+        Self {
+            data: Some(spec::Data::Oil(Oil { radius, intensity }))
         }
     }
 }
