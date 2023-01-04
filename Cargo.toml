@@ -3,5 +3,6 @@
 members = [
     "queryer",
     "thumbor",
-    "ownership"
+    "ownership",
+    "borrow"
 ]
