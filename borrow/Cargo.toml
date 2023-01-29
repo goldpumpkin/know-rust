@@ -16,6 +16,10 @@ name = "reborrow1"
 path = "src/reborrow1.rs"
 
 [[bin]]
+name = "reborrow2"
+path = "src/reborrow2.rs"
+
+[[bin]]
 name = "multiple_mut_ref"
 path = "src/multiple_mut_ref.rs"
 
