@@ -1,6 +1,7 @@
 [workspace]
 
 members = [
+    "01_type_system",
     "queryer",
     "thumbor",
     "ownership",

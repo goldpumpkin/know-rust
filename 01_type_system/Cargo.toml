@@ -1,0 +1,20 @@
+[package]
+name = "type_system"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "constant"
+path = "constant.rs"
+
+[[bin]]
+name = "id"
+path = "id.rs"
+
+[[bin]]
+name = "reader"
+path = "reader.rs"
+
+[[bin]]
+name = "writer"
+path = "writer.rs"
