@@ -20,6 +20,10 @@ name = "reborrow2"
 path = "src/reborrow2.rs"
 
 [[bin]]
+name = "move"
+path = "src/move.rs"
+
+[[bin]]
 name = "multiple_mut_ref"
 path = "src/multiple_mut_ref.rs"
 
