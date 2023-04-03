@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [[bin]]
-name = "Parse"
-path = "Parse.rs"
+name = "parse"
+path = "src/parse.rs"
 
 [[bin]]
 name = "id"
@@ -17,8 +17,7 @@ path = "reader.rs"
 
 [[bin]]
 name = "writer"
-path = "writer.rs"
-
+path = "src/writer.rs"
 
 [dependencies]
 regex = "1.5"
