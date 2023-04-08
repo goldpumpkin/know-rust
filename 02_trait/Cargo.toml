@@ -8,16 +8,12 @@ name = "parse"
 path = "src/parse.rs"
 
 [[bin]]
-name = "id"
-path = "id.rs"
-
-[[bin]]
-name = "reader"
-path = "reader.rs"
-
-[[bin]]
 name = "writer"
 path = "src/writer.rs"
+
+[[bin]]
+name = "parse_generics"
+path = "src/parse_generics.rs"
 
 [dependencies]
 regex = "1.5"
