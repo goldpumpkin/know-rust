@@ -19,5 +19,9 @@ path = "src/parse_generics.rs"
 name = "parse_generics_return"
 path = "src/parse_generics_return.rs"
 
+[[bin]]
+name = "complex"
+path = "src/complex.rs"
+
 [dependencies]
 regex = "1.5"
