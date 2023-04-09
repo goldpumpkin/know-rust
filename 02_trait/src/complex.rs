@@ -1,5 +1,7 @@
 use std::ops::Add;
 
+// 实现参数传递时，值会复制
+// #[derive(Debug, Copy, Clone)]
 #[derive(Debug)]
 struct Complex {
     real: f64,
