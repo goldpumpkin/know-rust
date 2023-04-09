@@ -31,5 +31,9 @@ path = "src/static_trait_distribution.rs"
 name = "dynamic_trait_distribution"
 path = "src/dynamic_trait_distribution.rs"
 
+[[bin]]
+name = "iterator"
+path = "src/iterator.rs"
+
 [dependencies]
 regex = "1.5"
