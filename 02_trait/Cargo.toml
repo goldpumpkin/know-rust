@@ -27,5 +27,9 @@ path = "src/complex.rs"
 name = "static_trait_distribution"
 path = "src/static_trait_distribution.rs"
 
+[[bin]]
+name = "dynamic_trait_distribution"
+path = "src/dynamic_trait_distribution.rs"
+
 [dependencies]
 regex = "1.5"
