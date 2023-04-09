@@ -15,6 +15,7 @@ impl Complex {
     }
 }
 
+// 实现 Complex 和 Complex 类型相加
 impl Add for Complex {
     type Output = Self;
 
@@ -25,6 +26,7 @@ impl Add for Complex {
     }
 }
 
+// 实现所有权不转移
 impl Add for &Complex {
     type Output = Complex;
 
@@ -35,6 +37,7 @@ impl Add for &Complex {
     }
 }
 
+//  实现 Complex 可以和 f64 类型相加
 impl Add<f64> for &Complex {
     type Output = Complex;
 
@@ -44,14 +47,33 @@ impl Add<f64> for &Complex {
     }
 }
 
+// 实现 Complex 可以和 $str 类型相加
+impl Add<&str> for &Complex {
+    type Output = Complex;
+
+    fn add(self, rhs: &str) -> Self::Output {
+        // 注意转换
+        let c: f64 = rhs.parse().unwrap();
+        let c1 = c + self.real;
+        Complex::new(c1, self.imagine)
+    }
+}
+
 
 fn main() {
     let c1 = Complex::new(1.0, 2f64);
     let c2 = Complex::new(3 as f64, 3.3);
-    println!("result: {:?}", &c1 + &c2);
+    println!("result-1: {:?}", &c1 + &c2);
+
+    let add_f64_num = &c1 + 2f64;
+    println!("result-2: {:?}", add_f64_num);
+
+    let add_str_num = &c1 + "3";
+    println!("result-3: {:?}", add_str_num);
 
     let result = c1 + c2;
-    println!("result: {:?}", result);
+    println!("result-4: {:?}", result);
+
 
     // 所有权转移了，则不能进行编译
     // println!("result: {:?}", c1 + c2);
