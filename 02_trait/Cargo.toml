@@ -23,5 +23,9 @@ path = "src/parse_generics_return.rs"
 name = "complex"
 path = "src/complex.rs"
 
+[[bin]]
+name = "static_trait_distribution"
+path = "src/static_trait_distribution.rs"
+
 [dependencies]
 regex = "1.5"
