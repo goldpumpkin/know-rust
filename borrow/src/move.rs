@@ -17,4 +17,4 @@ fn main() {
     max(&s1, &s2);
 }
 
-fn max(s1: &str, s2: &str) -> &str { if s1 > s2 { s1 } else { s2 } }
+fn max<'a>(s1: &'a str, s2: &'a str) -> &'a str { if s1 > s2 { s1 } else { s2 } }
