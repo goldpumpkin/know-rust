@@ -1,5 +1,3 @@
-use std::arch::aarch64::vcvtx_f32_f64;
-
 pub trait Formatter {
     fn format(&self, input: &mut String) -> bool;
 }
