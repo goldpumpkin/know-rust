@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 fn is_copy<T: Copy>() {}
 
 fn types_impl_copy_trait() {
