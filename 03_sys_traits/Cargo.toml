@@ -1,0 +1,18 @@
+[package]
+name = "sys_traits"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "clone_trait"
+path = "src/clone_trait.rs"
+
+[[bin]]
+name = "drop_trait"
+path = "src/drop_trait.rs"
+
+[[bin]]
+name = "sized_trait"
+path = "src/sized_trait.rs"
+
+[dependencies]
