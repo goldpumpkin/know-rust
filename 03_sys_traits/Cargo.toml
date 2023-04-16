@@ -15,4 +15,8 @@ path = "src/drop_trait.rs"
 name = "sized_trait"
 path = "src/sized_trait.rs"
 
+[[bin]]
+name = "send_sync"
+path = "src/send_sync.rs"
+
 [dependencies]
