@@ -19,4 +19,8 @@ path = "src/sized_trait.rs"
 name = "send_sync"
 path = "src/send_sync.rs"
 
+[[bin]]
+name = "convert"
+path = "src/convert.rs"
+
 [dependencies]
