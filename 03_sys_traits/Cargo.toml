@@ -23,4 +23,8 @@ path = "src/send_sync.rs"
 name = "convert"
 path = "src/convert.rs"
 
+[[bin]]
+name = "deref"
+path = "src/deref.rs"
+
 [dependencies]

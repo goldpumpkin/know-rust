@@ -19,6 +19,7 @@ impl AsRef<str> for Language {
     }
 }
 
+// 实现了 From trait 自动就实现了 Into trait
 fn print(v: impl Into<IpAddr>) {
     println!("{:?}", v.into());
 }
