@@ -27,4 +27,8 @@ path = "src/convert.rs"
 name = "deref"
 path = "src/deref.rs"
 
+[[bin]]
+name = "default"
+path = "src/default.rs"
+
 [dependencies]
