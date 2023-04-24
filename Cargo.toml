@@ -5,6 +5,7 @@ members = [
     "02_trait",
     "03_sys_traits",
     "04_multi_owner",
+    "05_smart_pointers",
     "queryer",
     "thumbor",
     "ownership",
