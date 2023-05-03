@@ -21,6 +21,10 @@ path = "src/guard.rs"
 name = "guard1"
 path = "src/guard1.rs"
 
+[[bin]]
+name = "mystring"
+path = "src/mystring.rs"
+
 [dependencies]
 url = "2"
 serde = { version = "1",features = ["derive"] }
