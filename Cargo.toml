@@ -8,6 +8,7 @@ members = [
     "05_smart_pointers",
     "06_data_structure",
     "07_hash_table",
+    "08_closure",
     "queryer",
     "thumbor",
     "ownership",
