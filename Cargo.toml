@@ -9,6 +9,7 @@ members = [
     "06_data_structure",
     "07_hash_table",
     "08_closure",
+    "09_kv",
     "queryer",
     "thumbor",
     "ownership",
