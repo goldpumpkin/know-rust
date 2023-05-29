@@ -34,6 +34,16 @@ impl CommandService for Hset {
     }
 }
 
+impl CommandService for Hdel {
+    fn execute(self, store: &impl Storage) -> CommandResponse {
+        match store.del(&self.table, &self.key) {
+            Ok(Some(v)) => v.into(),
+            Ok(None) => KvError::NotFound(self.table, self.key).into(),
+            Err(error) => error.into(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -88,5 +98,21 @@ mod tests {
             Kvpair::new("u3", 11.into()),
         ];
         assert_res_ok(res, &[], pairs);
+    }
+
+    #[test]
+    fn hdel_should_work() {
+        let store = MemTable::new();
+        let cmds = vec![
+            CommandRequest::new_hset("t1", "k1", "v1".into()),
+            CommandRequest::new_hset("t1", "k2", "v2".into()),
+        ];
+        for cmd in cmds {
+            dispatch(cmd, &store);
+        }
+
+        let cmd_del = CommandRequest::new_del("t1", "k1");
+        let res = dispatch(cmd_del, &store);
+        assert_res_ok(res, &["v1".into()], &[]);
     }
 }

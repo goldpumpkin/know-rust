@@ -1,7 +1,8 @@
+use http::StatusCode;
+
 use crate::pb::abi::command_request::RequestData;
 use crate::pb::abi::{value, CommandRequest, CommandResponse, Hget, Hgetall, Hset, Kvpair, Value};
-use crate::KvError;
-use http::StatusCode;
+use crate::{Hdel, KvError};
 
 pub mod abi;
 
@@ -31,6 +32,16 @@ impl CommandRequest {
             request_data: Some(RequestData::Hset(Hset {
                 table: table.into(),
                 pair: Some(Kvpair::new(key, value)),
+            })),
+        }
+    }
+
+    /// 创建 HDEL 命令
+    pub fn new_del(table: impl Into<String>, key: impl Into<String>) -> Self {
+        Self {
+            request_data: Some(RequestData::Hdel(Hdel {
+                table: table.into(),
+                key: key.into(),
             })),
         }
     }
