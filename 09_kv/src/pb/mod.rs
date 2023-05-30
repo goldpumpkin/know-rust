@@ -2,7 +2,7 @@ use http::StatusCode;
 
 use crate::pb::abi::command_request::RequestData;
 use crate::pb::abi::{value, CommandRequest, CommandResponse, Hget, Hgetall, Hset, Kvpair, Value};
-use crate::{Hdel, KvError};
+use crate::{Hdel, Hexist, Hmget, KvError};
 
 pub mod abi;
 
@@ -40,6 +40,24 @@ impl CommandRequest {
     pub fn new_del(table: impl Into<String>, key: impl Into<String>) -> Self {
         Self {
             request_data: Some(RequestData::Hdel(Hdel {
+                table: table.into(),
+                key: key.into(),
+            })),
+        }
+    }
+
+    pub fn new_hmget(table: impl Into<String>, keys: impl Into<Vec<String>>) -> Self {
+        Self {
+            request_data: Some(RequestData::Hmget(Hmget {
+                table: table.into(),
+                keys: keys.into(),
+            })),
+        }
+    }
+
+    pub fn new_exist(table: impl Into<String>, key: impl Into<String>) -> Self {
+        Self {
+            request_data: Some(RequestData::Hexist(Hexist {
                 table: table.into(),
                 key: key.into(),
             })),
@@ -90,6 +108,20 @@ impl From<Value> for CommandResponse {
         Self {
             status: StatusCode::OK.as_u16() as _,
             values: vec![v],
+            ..Default::default()
+        }
+    }
+}
+
+impl From<bool> for CommandResponse {
+    fn from(value: bool) -> Self {
+        let s = if value {
+            StatusCode::OK
+        } else {
+            StatusCode::NOT_FOUND
+        };
+        Self {
+            status: s.as_u16() as _,
             ..Default::default()
         }
     }

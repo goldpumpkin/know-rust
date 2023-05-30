@@ -1,3 +1,6 @@
+use std::io::Read;
+use std::mem::take;
+
 use crate::service::CommandService;
 use crate::storage::Storage;
 use crate::*;
@@ -44,8 +47,37 @@ impl CommandService for Hdel {
     }
 }
 
+impl CommandService for Hmget {
+    fn execute(self, store: &impl Storage) -> CommandResponse {
+        let mut result = Vec::new();
+
+        for key in self.keys {
+            match store.get(&self.table, key.as_str()) {
+                Ok(Some(v)) => {
+                    let keypair = Kvpair::new(key, v);
+                    result.push(keypair);
+                }
+                Err(_) => {}
+                _ => {}
+            }
+        }
+
+        result.into()
+    }
+}
+
+impl CommandService for Hexist {
+    fn execute(self, store: &impl Storage) -> CommandResponse {
+        match store.contains(&self.table, &self.key) {
+            Ok(v) => v.into(),
+            Err(error) => error.into(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
+    use http::StatusCode;
     use super::*;
 
     #[test]
@@ -114,5 +146,48 @@ mod tests {
         let cmd_del = CommandRequest::new_del("t1", "k1");
         let res = dispatch(cmd_del, &store);
         assert_res_ok(res, &["v1".into()], &[]);
+    }
+
+    #[test]
+    fn hdel_should_work2() {
+        let store = MemTable::new();
+        let cmd = CommandRequest::new_hset("t1", "k1", "v1".into());
+        dispatch(cmd, &store);
+
+        let cmd_del = CommandRequest::new_del("t1", "k1");
+        let res = dispatch(cmd_del, &store);
+        assert_res_ok(res, &["v1".into()], &[]);
+    }
+
+    #[test]
+    fn hmget_should_work() {
+        let store = MemTable::new();
+        let cmds = vec![
+            CommandRequest::new_hset("t", "k1", 10.into()),
+            CommandRequest::new_hset("t", "k2", "v2".into()),
+            CommandRequest::new_hset("t", "k3", "1".into()),
+        ];
+
+        for c in cmds {
+            dispatch(c, &store);
+        }
+
+        let keys = vec!["k1".to_string(), "k2".to_string(), "k3".to_string()];
+        let cmd = CommandRequest::new_hmget("t", keys);
+        let res = dispatch(cmd, &store);
+        let pairs = &[
+            Kvpair::new("k1", 10.into()),
+            Kvpair::new("k2", "v2".into()),
+            Kvpair::new("k3", "1".into()),
+        ];
+        assert_res_ok(res, &[], pairs);
+    }
+
+    #[test]
+    fn hexist_should_work() {
+        let store = MemTable::new();
+        let cmd = CommandRequest::new_exist("t", "k");
+        let res = dispatch(cmd, &store);
+        assert_res_error(res, StatusCode::NOT_FOUND.as_u16() as _ ,"")
     }
 }
