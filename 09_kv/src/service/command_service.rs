@@ -77,8 +77,8 @@ impl CommandService for Hexist {
 
 #[cfg(test)]
 mod tests {
-    use http::StatusCode;
     use super::*;
+    use http::StatusCode;
 
     #[test]
     fn hset_should_work() {
@@ -188,6 +188,6 @@ mod tests {
         let store = MemTable::new();
         let cmd = CommandRequest::new_exist("t", "k");
         let res = dispatch(cmd, &store);
-        assert_res_error(res, StatusCode::NOT_FOUND.as_u16() as _ ,"")
+        assert_res_error(res, StatusCode::NOT_FOUND.as_u16() as _, "")
     }
 }
