@@ -2,6 +2,7 @@ use std::fmt::{Display, Formatter};
 
 use clap::Parser;
 use colorized::{colorize_this, Colors};
+use glob::glob;
 use regex::Regex;
 
 #[derive(Parser)]
@@ -24,20 +25,26 @@ fn main() {
     let args = Cli::parse();
     println!("{}", &args);
 
+    // 匹配内容
     let p = &args.pattern;
     let r = Regex::new(p).unwrap();
 
-    let mut content = std::fs::read_to_string(&args.path).expect("could not read file");
+    // 读取文件
+    let x = args.path.to_str().unwrap();
+    let paths= glob(x).unwrap();
 
-    // let dir = std::fs::read_dir(&args.path).unwrap();
+    for g in paths {
+        let per_path = g.unwrap();
+        println!("{}:", &per_path.display());
+        let mut content = std::fs::read_to_string(per_path).expect("could not read file");
 
-    process(&r, &mut content);
+        process(&r, &mut content);
+        println!("------------file split------------");
+    }
 }
 
-/// 处理每个文件
+/// process per file
 fn process(r: &Regex, content: &mut String) {
-
-
     let mut num: i64 = 0;
     for line in content.lines() {
         num += 1;
