@@ -37,3 +37,21 @@ Grep Rsut 版实现
 2. 对于正则表达式的支持，可以使用 regex。
 3. 至于文件的读取，可以使用 std::fs 或者 tokio::fs。你可以顺序对所有满足通配符的文件进行处理，也可以用 rayon 或者 tokio 来并行处理。
 4. 对于输出的结果，最好能把匹配的文字用不同颜色展示
+
+
+
+调试
+
+`cargo run 'model[^\\w]' 'src/*.rs'`
+
+`cargo run -- 'model[^\\w]' 'src/*.rs'`
+
+
+
+本地安装
+
+`cargo install --path <PATH> `
+
+Run Command 
+
+`rgrep 'model[^\\w]' 'src/*.rs'`

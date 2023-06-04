@@ -6,7 +6,13 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = { version = "4.3.1", features = ["derive"] }
+clap = { version = "4.3.1", features = ["derive"] } # 解析命令行参数
 regex = "1.8.3"
-colorized = "1.0.0"
-glob = "0.3.1"
+colorized = "1.0.0" # 终端文字颜色
+colored = "2"
+glob = "0.3.1" # 文件通配符处理
+tokio = { version = "1", features = ["full"] } # 异步处理
+rayon = "1"
+thiserror = "1"
+itertools = "0.10"
+anyhow = "1"
