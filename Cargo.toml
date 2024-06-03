@@ -15,4 +15,4 @@ members = [
     "thumbor",
     "ownership",
     "borrow"
-]
+, "change_git_remote_domain"]
